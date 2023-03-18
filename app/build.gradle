@@ -1,90 +1,591 @@
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-}
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-android {
-    compileSdkVersion 30
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_10"
+        android:orientation="horizontal">
 
-    defaultConfig {
-        applicationId "com.example.androiddevchallenge"
-        minSdkVersion 23
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    signingConfigs {
-        // We use a bundled debug keystore, to allow debug builds from CI to be upgradable
-        debug {
-            storeFile rootProject.file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-        }
-    }
-
-    buildTypes {
-        debug {
-            signingConfig signingConfigs.debug
-        }
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-
-    buildFeatures {
-        compose true
-
-        // Disable unused AGP features
-        buildConfig false
-        aidl false
-        renderScript false
-        resValues false
-        shaders false
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion compose_version
-    }
-
-    packagingOptions {
-        // Multiple dependency bring these files in. Exclude them to enable
-        // our test APK to build (has no effect on our AARs)
-        excludes += "/META-INF/AL2.0"
-        excludes += "/META-INF/LGPL2.1"
-    }
-}
-
-dependencies {
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    implementation "androidx.activity:activity-compose:1.3.0-alpha03"
-    implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.material:material:$compose_version"
-    implementation "androidx.compose.material:material-icons-extended:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling:$compose_version"
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.0'
-
-    implementation "androidx.compose.ui:ui-tooling:$compose_version"
-    implementation "androidx.compose.ui:ui-util:$compose_version"
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.0'
-    implementation "androidx.compose.runtime:runtime-livedata:1.0.0-beta01"
-
-    testImplementation 'junit:junit:4.13.2'
-
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+        <com.wdp.www.tjaraapp.Utils.CustomBoldTextView
+            android:id="@+id/textProductName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:breakStrategy="high_quality"
+            android:inputType="textMultiLine"
+            android:lineSpacingExtra="4sp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold" />
 
 
-    implementation 'com.github.tapadoo:alerter:7.2.4'
+        <com.wdp.www.tjaraapp.Utils.CustomTextView
+            android:id="@+id/textProductId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:breakStrategy="balanced"
+            android:singleLine="true"
+            android:text="Product"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_12" />
 
-}
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/main_lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_10"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="@dimen/dp_80"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:layout_height="115dp"
+                android:background="@drawable/edittext_back">
+
+                <ImageView
+                    android:id="@+id/dashboard_product_image"
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="1dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/productonee" />
+
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_5"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_2">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_3"
+                android:orientation="horizontal">
+
+                <com.wdp.www.tjaraapp.Utils.CustomBoldTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/order_id"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12"
+                    android:textStyle="bold" />
+
+                <com.wdp.www.tjaraapp.Utils.CustomTextView
+                    android:id="@+id/tvOrderId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_5"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_3"
+                android:orientation="horizontal">
+
+                <com.wdp.www.tjaraapp.Utils.CustomBoldTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12"
+                    android:textStyle="bold"
+                    android:text="@string/model_colon"/>
+
+                <com.wdp.www.tjaraapp.Utils.CustomTextView
+                    android:id="@+id/textModelBuyer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_5"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_3"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <com.wdp.www.tjaraapp.Utils.CustomBoldTextView
+                        android:id="@+id/textQuantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_5"
+                        android:text="$12"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_12"
+                        android:textStyle="bold" />
+
+                    <com.wdp.www.tjaraapp.Utils.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/quantity_simple"
+                        android:textColor="@color/black"
+                        android:textSize="10sp" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray_price" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_3"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="vertical">
+
+                    <com.wdp.www.tjaraapp.Utils.CustomBoldTextView
+                        android:id="@+id/textPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_5"
+                        android:text="$12"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_12"
+                        android:textStyle="bold" />
+
+                    <com.wdp.www.tjaraapp.Utils.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/unit_price"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_12" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray_price" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_3"
+                    android:orientation="vertical">
+
+                    <com.wdp.www.tjaraapp.Utils.CustomBoldTextView
+                        android:id="@+id/tvCommission"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_5"
+                        android:text="$12"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_12"
+                        android:textStyle="bold" />
+
+                    <com.wdp.www.tjaraapp.Utils.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/commission"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_12" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray_price" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:src="@drawable/wishlist"/>
+
+                <TextView
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Marked\nShipped"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.wdp.www.tjaraapp.Utils.CustomBoldTextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/buyer"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12"
+                    android:textStyle="bold" />
+
+                <com.wdp.www.tjaraapp.Utils.CustomTextView
+                    android:id="@+id/tvBuyer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_5"
+                    android:text="Virat Kohli"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.wdp.www.tjaraapp.Utils.CustomBoldTextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/date"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12"
+                    android:textStyle="bold" />
+
+                <com.wdp.www.tjaraapp.Utils.CustomTextView
+                    android:id="@+id/textDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_5"
+                    android:text="24-34-9878 10:00 AM At"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_3"
+                android:orientation="horizontal">
+
+                <com.wdp.www.tjaraapp.Utils.CustomBoldTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/from_wallet"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12"
+                    android:textStyle="bold" />
+
+                <com.wdp.www.tjaraapp.Utils.CustomTextView
+                    android:id="@+id/from_wallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_5"
+                    android:text=" $40"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_3"
+                android:orientation="horizontal">
+
+                <com.wdp.www.tjaraapp.Utils.CustomBoldTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/balance_due"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12"
+                    android:textStyle="bold" />
+
+                <com.wdp.www.tjaraapp.Utils.CustomTextView
+                    android:id="@+id/balance_due"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_5"
+                    android:text=" $370 + Delivery"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/discountPriceLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_3"
+                android:orientation="horizontal">
+
+                <com.wdp.www.tjaraapp.Utils.CustomBoldTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/discounted_price"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12"
+                    android:textStyle="bold" />
+
+                <com.wdp.www.tjaraapp.Utils.CustomTextView
+                    android:id="@+id/textDiscountPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_5"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/sp_12" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/walletBalLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_3"
+                android:orientation="horizontal">
+
+                <com.wdp.www.tjaraapp.Utils.CustomBoldTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/debit_wallet_amount"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12"
+                    android:textStyle="bold" />
+
+                <com.wdp.www.tjaraapp.Utils.CustomTextView
+                    android:id="@+id/textWalletAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_5"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/sp_12" />
+
+                <ImageView
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    android:src="@drawable/reward" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/approxPriceLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_3"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <com.wdp.www.tjaraapp.Utils.CustomBoldTextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/approx_price_with_colon"
+                    android:textSize="@dimen/sp_12"
+                    android:textStyle="bold" />
+
+                <com.wdp.www.tjaraapp.Utils.CustomTextView
+                    android:id="@+id/textApproxPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_5"
+                    android:textSize="@dimen/sp_12" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_3"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:id="@+id/layoutMore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="@dimen/dp_5"
+                    android:gravity="end|center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/sp_14"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/dp_5"
+                        android:layout_marginTop="@dimen/dp_2"
+                        android:contentDescription="TODO"
+                        android:foregroundGravity="center"
+                        android:src="@mipmap/arrow_green"
+                        android:visibility="gone" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_3"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.wdp.www.tjaraapp.Utils.CustomBoldTextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:gravity="left"
+                        android:text="@string/cashbackamount"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/sp_12"
+                        android:textStyle="bold" />
+
+                    <com.wdp.www.tjaraapp.Utils.CustomTextView
+                        android:id="@+id/textcashbackamount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_5"
+                        android:text="xfvvgv"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/sp_12"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_3"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/popularity_gray"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="horizontal">
+
+        <com.wdp.www.tjaraapp.Utils.CustomTextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Thank you for fulfilling the order Thank you for fulfilling the order Thank you for fulfilling the order Thank you for fulfilling the order Thank you for fulfilling the order Thank you for fulfilling the order Thank you for fulfilling the order Thank you for fulfilling the order Thank you for fulfilling the order "
+            android:textColor="@color/black2"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/txtAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/action_button_back"
+            android:fontFamily="@font/quicksand_semi_bold"
+            android:gravity="center"
+            android:drawableEnd="@drawable/arrow_down_24"
+            android:includeFontPadding="false"
+            android:paddingHorizontal="@dimen/dp_15"
+            android:paddingVertical="5sp"
+            android:text="@string/actions_plain"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_12" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/llconfirmPayment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_3"
+        android:layout_marginBottom="5dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.wdp.www.tjaraapp.Utils.CustomButton
+                android:id="@+id/confirmPayment"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_25"
+                android:layout_marginEnd="@dimen/dp_40"
+                android:background="@drawable/orange_curve_btn"
+                android:text="  Confirm Payment(?)  "
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_13"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
